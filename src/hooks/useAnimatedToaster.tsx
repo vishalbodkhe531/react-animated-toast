@@ -1,4 +1,14 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
+"use client";
+
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  useState as useReactState,
+} from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { BorderBeam } from "@/components/magicui/border-beam";
 
@@ -26,6 +36,7 @@ export const AnimatedToaster: React.FC<
   React.PropsWithChildren<ToasterProps>
 > = ({ children, position = "top-right", reverseOrder = false }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const constraintRef = useRef<HTMLDivElement>(null);
 
   const showToast = useCallback(
     (message: string) => {
@@ -54,22 +65,33 @@ export const AnimatedToaster: React.FC<
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className={`fixed z-50 ${getPositionStyle()} space-y-2`}>
-        <AnimatePresence>
-          {toasts.map((toast) => (
-            <motion.div
-              key={toast.id}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="px-4 py-2 rounded shadow"
-            >
-              {toast.message}
-              <BorderBeam duration={8} size={100} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
+
+      <div
+        ref={constraintRef}
+        className="fixed inset-0 pointer-events-none z-50"
+      >
+        <div
+          className={`absolute ${getPositionStyle()} space-y-2 pointer-events-auto`}
+        >
+          <AnimatePresence>
+            {toasts.map((toast) => (
+              <motion.div
+                key={toast.id}
+                drag
+                dragConstraints={constraintRef}
+                dragElastic={0.3}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="px-4 py-2 rounded shadow cursor-pointer relative "
+              >
+                {toast.message}
+                <BorderBeam duration={8} size={100} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
     </ToastContext.Provider>
   );
