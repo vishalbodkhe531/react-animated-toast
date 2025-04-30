@@ -16,8 +16,7 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-
-// import { Button, ButtonProps } from "@/components/ui/button";
+import { Button } from "../ui/button";
 
 type Api = {
   fire: (options?: ConfettiOptions) => void;
@@ -34,7 +33,6 @@ export type ConfettiRef = Api | null;
 
 const ConfettiContext = createContext<Api>({} as Api);
 
-// Define component first
 const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
   const {
     options,
@@ -103,13 +101,12 @@ const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
   );
 });
 
-// Set display name immediately
 ConfettiComponent.displayName = "Confetti";
 
-// Export as Confetti
 export const Confetti = ConfettiComponent;
 
-interface ConfettiButtonProps extends ButtonProps {
+interface ConfettiButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   options?: ConfettiOptions &
     ConfettiGlobalOptions & { canvas?: HTMLCanvasElement };
   children?: React.ReactNode;
