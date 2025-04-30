@@ -18,9 +18,6 @@ export default function DragConstraints() {
   );
 }
 
-/**
- * ==============   Styles   ================
- */
 
 const constraints = {
   width: 300,
