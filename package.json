@@ -5,6 +5,20 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "toast",
+    "react-toast",
+    "react",
+    "notification",
+    "framer-motion",
+    "confetti",
+    "tailwind"
+  ],
+  "author": "Vishal Bodkhe",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "npx rollup -c",
