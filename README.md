@@ -1,54 +1,66 @@
-# React + TypeScript + Vite
+# 🚀 react-animated-toast
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight and customizable animated toast notification system for React, built with Framer Motion and confetti magic 🎉.
 
-Currently, two official plugins are available:
+## 📦 Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Install the package using npm or yarn:
 
-## Expanding the ESLint configuration
+```bash
+npm install react-animated-toast
+# or
+yarn add react-animated-toast
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+⚡ Quick Start
+1. Wrap your app with AnimatedToaster
+tsx
+Copy
+Edit
+import { AnimatedToaster } from "react-animated-toast";
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+function App() {
+  return (
+    <AnimatedToaster position="top-right" reverseOrder={false}>
+      <MainComponent />
+    </AnimatedToaster>
+  );
+}
+
+
+
+
+
+
+2. Use the useToast hook in any child component
+tsx
+Copy
+Edit
+import { useToast } from "react-animated-toast";
+
+function MainComponent() {
+  const { showToast } = useToast();
+
+  return (
+    <button
+      onClick={() => showToast.success("Hello from Animated Toast!")}
+      className="bg-blue-500 text-white px-4 py-2 rounded"
+    >
+      Show Toast
+    </button>
+  );
+}
+
+
+
+✅ Toast Types
+You can display the following types of toasts:
+
+tsx
+Copy
+Edit
+showToast.success("Success message");
+showToast.error("Error message");
+showToast.warning("Warning message");
