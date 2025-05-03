@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 
-
 export default function DragConstraints() {
   const constraintsRef = useRef<HTMLDivElement>(null);
 
@@ -16,7 +15,6 @@ export default function DragConstraints() {
     </motion.div>
   );
 }
-
 
 const constraints = {
   width: 300,

@@ -1,32 +1,35 @@
-import { defineConfig } from "rollup";
 import typescript from "@rollup/plugin-typescript";
-import babel from "@rollup/plugin-babel";
+import { defineConfig } from "rollup";
+import dts from "rollup-plugin-dts";
 
-export default defineConfig({
-  input: "src/index.ts",
-  output: {
-    dir: "dist",
-    format: "es",
-  },
-  external: [
-    "react",
-    "react-dom",
-    "motion",
-    "canvas-confetti",
-    "clsx",
-    "tailwind-merge",
-    "lucide-react",
-    "framer-motion",
-    "react-icons",
-    "class-variance-authority",
-    "tailwindcss",
-  ],
-  plugins: [
-    typescript({ tsconfig: "./tsconfig.json" }),
-    babel({
-      extensions: [".js", ".jsx", ".ts", ".tsx"],
-      babelHelpers: "bundled",
-      include: ["src/**/*"],
-    }),
-  ],
-});
+export default [
+  defineConfig({
+    input: "src/index.ts",
+    output: [
+      {
+        file: "dist/index.js",
+        format: "esm",
+        sourcemap: true,
+      },
+      {
+        file: "dist/index.cjs",
+        format: "cjs",
+        sourcemap: true,
+      },
+    ],
+    external: ["react", "react-dom"],
+    plugins: [
+      typescript({
+        tsconfig: "./tsconfig.build.json",
+        declaration: true,
+        declarationDir: "dist",
+      }),
+    ],
+  }),
+
+  defineConfig({
+    input: "dist/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "es" }],
+    plugins: [dts()],
+  }),
+];
