@@ -17,7 +17,19 @@ export default [
         sourcemap: true,
       },
     ],
-    external: ["react", "react-dom", "tailwindcss", "lucide-react", "motion", "framer-motion", "canvas-confetti", "class-variance-authority", "clsx", "react-icons", "tailwind-merge"],
+    external: [
+      "react",
+      "react-dom",
+      "tailwindcss",
+      "lucide-react",
+      "motion",
+      "framer-motion",
+      "canvas-confetti",
+      "class-variance-authority",
+      "clsx",
+      "react-icons",
+      "tailwind-merge",
+    ],
     plugins: [
       typescript({
         tsconfig: "./tsconfig.build.json",
