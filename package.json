@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.0.8",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "main.tsx",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
