@@ -15,6 +15,7 @@ import React, {
   useRef,
 } from "react";
 import { Button } from "../ui/button";
+import { motion } from "framer-motion";
 
 type Api = {
   fire: (options?: ConfettiOptions) => void;
@@ -142,3 +143,14 @@ const ConfettiButtonComponent = ({
 ConfettiButtonComponent.displayName = "ConfettiButton";
 
 export const ConfettiButton = ConfettiButtonComponent;
+
+const Toast = forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<typeof motion.div>
+>((props, ref) => (
+  <motion.div ref={ref} {...props}>
+    {/* ... */}
+  </motion.div>
+));
+
+export default Toast;
