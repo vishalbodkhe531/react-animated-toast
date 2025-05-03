@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
-import { AnimatedToaster } from "./hooks/useAnimatedToaster.tsx";
+import { AnimatedToaster } from "./hooks/useAnimatedToaster";
+import App from "./App";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
