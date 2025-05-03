@@ -32,7 +32,7 @@ const ToastContext = createContext<{
   };
 } | null>(null);
 
-export const useToast = () => {
+const useToast = () => {
   const context = useContext(ToastContext);
   if (!context) throw new Error("useToast must be used within AnimatedToaster");
   return context;
@@ -187,4 +187,4 @@ const AnimatedToaster = ({
   );
 };
 
-export { AnimatedToaster };
+export { AnimatedToaster, useToast };

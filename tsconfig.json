@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "declarationDir": "dist",
+    "emitDeclarationOnly": false,
     "outDir": "dist",
+    "rootDir": "src",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
