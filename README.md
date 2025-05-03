@@ -12,13 +12,9 @@ npm install react-animated-toast
 yarn add react-animated-toast
 
 
-
-
 ⚡ Quick Start
 1. Wrap your app with AnimatedToaster
-tsx
-Copy
-Edit
+
 import { AnimatedToaster } from "react-animated-toast";
 
 function App() {
@@ -31,13 +27,8 @@ function App() {
 
 
 
-
-
-
 2. Use the useToast hook in any child component
-tsx
-Copy
-Edit
+
 import { useToast } from "react-animated-toast";
 
 function MainComponent() {
@@ -56,11 +47,9 @@ function MainComponent() {
 
 
 ✅ Toast Types
+
 You can display the following types of toasts:
 
-tsx
-Copy
-Edit
 showToast.success("Success message");
 showToast.error("Error message");
 showToast.warning("Warning message");

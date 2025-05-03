@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, {
+import {
   createContext,
+  PropsWithChildren,
   useCallback,
   useContext,
   useRef,
@@ -37,9 +38,11 @@ export const useToast = () => {
   return context;
 };
 
-export const AnimatedToaster: React.FC<
-  React.PropsWithChildren<ToasterProps>
-> = ({ children, position = "top-right", reverseOrder = false }) => {
+const AnimatedToaster = ({
+  children,
+  position = "top-right",
+  reverseOrder = false,
+}: PropsWithChildren<ToasterProps>) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
   const constraintRef = useRef<HTMLDivElement>(null);
 
@@ -85,7 +88,6 @@ export const AnimatedToaster: React.FC<
         reverseOrder ? [newToast, ...prev] : [...prev, newToast]
       );
 
-      // 🎉 Trigger confetti only for success
       if (variant === "success") {
         triggerConfetti();
       }
@@ -184,3 +186,5 @@ export const AnimatedToaster: React.FC<
     </ToastContext.Provider>
   );
 };
+
+export { AnimatedToaster };

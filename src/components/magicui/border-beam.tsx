@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { motion, MotionStyle, Transition } from "motion/react";
+import { motion, MotionStyle, Transition } from "framer-motion";
 
 interface BorderBeamProps {
   size?: number;
