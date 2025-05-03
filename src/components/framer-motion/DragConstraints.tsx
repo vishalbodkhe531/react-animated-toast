@@ -1,20 +1,5 @@
 import { motion } from "framer-motion";
-import { useRef } from "react";
-
-export default function DragConstraints() {
-  const constraintsRef = useRef<HTMLDivElement>(null);
-
-  return (
-    <motion.div ref={constraintsRef} style={constraints}>
-      <motion.div
-        drag
-        dragConstraints={constraintsRef}
-        dragElastic={0.2}
-        style={box}
-      />
-    </motion.div>
-  );
-}
+import { useRef, useState, useEffect } from "react";
 
 const constraints = {
   width: 300,
@@ -29,3 +14,27 @@ const box = {
   backgroundColor: "#ff0088",
   borderRadius: 10,
 };
+
+export default function DragConstraints() {
+  const constraintsRef = useRef<HTMLDivElement>(null);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (constraintsRef.current) {
+      setIsReady(true);
+    }
+  }, []);
+
+  return (
+    <motion.div ref={constraintsRef} style={constraints}>
+      {isReady && (
+        <motion.div
+          drag
+          dragConstraints={constraintsRef}
+          dragElastic={0.2}
+          style={box}
+        />
+      )}
+    </motion.div>
+  );
+}
