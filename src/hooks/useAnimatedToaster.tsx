@@ -128,33 +128,33 @@
 //           <AnimatePresence>
 //             {constraintRef.current &&
 //               toasts.map((toast) => (
-//                 <motion.div
-//                   key={toast.id}
-//                   drag
-//                   dragConstraints={constraintRef}
-//                   dragElastic={0.3}
-//                   initial={{ opacity: 0, y: -20 }}
-//                   animate={{ opacity: 1, y: 0 }}
-//                   exit={{ opacity: 0, y: -20 }}
-//                   transition={{ duration: 0.3 }}
-//                   className={`px-4 py-2 rounded-lg shadow-lg text-white font-semibold relative cursor-pointer flex items-center gap-2
-//                     ${
-//                       toast.variant === "success"
-//                         ? "bg-gradient-to-r from-green-400 to-green-600 shadow-green-500/40"
-//                         : ""
-//                     }
-//                     ${
-//                       toast.variant === "error"
-//                         ? "bg-gradient-to-r from-red-400 to-red-600 shadow-red-500/40"
-//                         : ""
-//                     }
-//                     ${
-//                       toast.variant === "warning"
-//                         ? "bg-gradient-to-r from-yellow-300 to-yellow-500 text-black shadow-yellow-400/50"
-//                         : ""
-//                     }
-//                   `}
-//                 >
+// <motion.div
+//   key={toast.id}
+//   drag
+//   dragConstraints={constraintRef}
+//   dragElastic={0.3}
+//   initial={{ opacity: 0, y: -20 }}
+//   animate={{ opacity: 1, y: 0 }}
+//   exit={{ opacity: 0, y: -20 }}
+//   transition={{ duration: 0.3 }}
+//   className={`px-4 py-2 rounded-lg shadow-lg text-white font-semibold relative cursor-pointer flex items-center gap-2
+//     ${
+//       toast.variant === "success"
+//         ? "bg-gradient-to-r from-green-400 to-green-600 shadow-green-500/40"
+//         : ""
+//     }
+//     ${
+//       toast.variant === "error"
+//         ? "bg-gradient-to-r from-red-400 to-red-600 shadow-red-500/40"
+//         : ""
+//     }
+//     ${
+//       toast.variant === "warning"
+//         ? "bg-gradient-to-r from-yellow-300 to-yellow-500 text-black shadow-yellow-400/50"
+//         : ""
+//     }
+//   `}
+// >
 //                   {toast.variant === "success" && (
 //                     <FaRegCircleCheck size={20} />
 //                   )}
@@ -202,9 +202,9 @@ import {
 } from "react";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { FiAlertTriangle, FiXCircle } from "react-icons/fi";
-
 import { BorderBeam } from "@/components/magicui/border-beam";
 import confetti from "canvas-confetti";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Toast = {
   id: string;
@@ -318,10 +318,19 @@ const AnimatedToaster = ({
         <div
           className={`absolute ${getPositionStyle()} select-none space-y-2 pointer-events-auto`}
         >
-          {constraintRef.current &&
-            toasts.map((toast) => (
-              <div
-                className={`px-4 py-2 rounded-lg shadow-lg text-white font-semibold relative cursor-pointer flex items-center gap-2
+          <AnimatePresence>
+            {constraintRef.current &&
+              toasts.map((toast) => (
+                <motion.div
+                  key={toast.id}
+                  drag
+                  dragConstraints={constraintRef}
+                  dragElastic={0.3}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className={`px-4 py-2 rounded-lg shadow-lg text-white font-semibold relative cursor-pointer flex items-center gap-2
                     ${
                       toast.variant === "success"
                         ? "bg-gradient-to-r from-green-400 to-green-600 shadow-green-500/40"
@@ -338,33 +347,36 @@ const AnimatedToaster = ({
                         : ""
                     }
                   `}
-              >
-                {toast.variant === "success" && <FaRegCircleCheck size={20} />}
-                {toast.variant === "error" && <FiXCircle size={20} />}
-                {toast.variant === "warning" && <FiAlertTriangle size={20} />}
+                >
+                  {toast.variant === "success" && (
+                    <FaRegCircleCheck size={20} />
+                  )}
+                  {toast.variant === "error" && <FiXCircle size={20} />}
+                  {toast.variant === "warning" && <FiAlertTriangle size={20} />}
 
-                <span>{toast.message}</span>
+                  <span>{toast.message}</span>
 
-                <BorderBeam
-                  duration={8}
-                  size={100}
-                  colorFrom={
-                    toast.variant === "success"
-                      ? "#34D399"
-                      : toast.variant === "error"
-                      ? "#F87171"
-                      : "#FBBF24"
-                  }
-                  colorTo={
-                    toast.variant === "success"
-                      ? "#FF416C"
-                      : toast.variant === "error"
-                      ? "#00F5A0"
-                      : "#F59E0B"
-                  }
-                />
-              </div>
-            ))}
+                  <BorderBeam
+                    duration={8}
+                    size={100}
+                    colorFrom={
+                      toast.variant === "success"
+                        ? "#34D399"
+                        : toast.variant === "error"
+                        ? "#F87171"
+                        : "#FBBF24"
+                    }
+                    colorTo={
+                      toast.variant === "success"
+                        ? "#FF416C"
+                        : toast.variant === "error"
+                        ? "#00F5A0"
+                        : "#F59E0B"
+                    }
+                  />
+                </motion.div>
+              ))}
+          </AnimatePresence>
         </div>
       </div>
     </ToastContext.Provider>
